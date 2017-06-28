@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" media="all" href="/public/vendor/mocha.css">
+<link href="/public/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="/public/css/main.min.css" rel="stylesheet" type="text/css" />
+<script src="/public/js/angular.js"></script>
+<script src="/public/js/jquery.js"></script>
+<script src="/public/js/tether.js"></script>
+<script src="/public/js/bootstrap.min.js"></script>
+<script src="/public/js/controllers.js"></script>
+
+<body class="blue-bg">
+
+	<div class="app-wrap" ng-app="myApp" >
+		<div ng-controller="myCtrl" class="container-fluid container">
+			<div class="row">
+				<div class="sidebar col-md-3">
+					<h4>Filter by:</h4>
+					<label for="name">Name</label>
+					<input id="name" name="name" ng-model="name" type="text" value="" placeholder="Enter name here.." ng-change="applyFilter()"  class="form-control"/>
+					<label for="severity">Country check severity</label>
+					<select id="severity" name="severity" ng-model="severity" ng-change="applyFilter()"  class="form-control">
+						<option value="">Select</option>
+						<option value="90-CRITICAL">Critical</option>
+						<option value="70-WARNING">Warning</option>
+						<option value="60-OK">OK</option>
+						<option value="30-UNKNOWN">Unknown</option>
+					</select>
+				</div>
+				<div class="main-wrapper col-md-9">
+					<div class="text-right sort-wrap">
+						<label for="sort" >Sort by:</label>  
+						<select ng-model="sort" id="sort" class="form-control">
+							<option value="name">Name</option>
+							<option value="created">Created Oldest</option>
+							<option value="-created">Created Newest</option>
+							<option value="modified">Modified Oldest</option>
+							<option value="-modified">Modified Newest</option>
+						</select>
+					</div>
+					<br>
+					<table class="table table-striped">
+	  					<thead>
+							<tr><th>Name</th><th>Severity</th><th>Created</th><th>Modified</th></tr>
+						</thead>
+						<tbody>
+						    <tr ng-repeat="item in results | toArray | orderBy:sort | limitTo:100 " >
+						        <td>{{item.name}}</td>
+						        <td><span class="severity">{{item.country_check_severity}}</span></td>
+						        <td>{{item.created}}</td>
+						        <td>{{item.modified}}</td>
+						   	</tr>
+						</tbody>
+				   	</table>
+				</div>
+			</div>
+
+		</div>
+
+	  <div id="mocha"><h3>Front-end tests:</h3></div>
+	  <div id="messages"></div>
+	  <div id="fixtures"></div>
+	</div>
+  <script src="/public/vendor/mocha.js"></script>
+  <script src="/public/vendor/chai.js"></script>
+  <script>mocha.setup('bdd')</script>
+  <script src="/public/js/test.js"></script>
+  <script>mocha.run();</script>
+</body>
+</html>

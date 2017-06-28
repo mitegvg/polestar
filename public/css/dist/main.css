@@ -1,0 +1,22 @@
+body {
+  padding: 20px 0;
+  font-size: 12px; }
+
+.form-control {
+  font-size: 12px; }
+
+#mocha ul {
+  position: relative; }
+
+.sidebar label {
+  font-weight: bold;
+  margin-top: 8px; }
+
+.sort-wrap label {
+  padding: 4px;
+  margin-bottom: 0;
+  line-height: 26px; }
+
+.sort-wrap #sort {
+  max-width: 150px;
+  float: right; }
